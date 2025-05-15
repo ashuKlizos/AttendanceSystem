@@ -1,4 +1,5 @@
 package com.klizo.attendance.userservice.entity;
+import com.klizo.attendance.userservice.enumeration.AdminRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
