@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "employee_details")
@@ -37,10 +36,7 @@ public class EmployeeDetails {
     @NotBlank
     private String designation;
 
-    @Column(nullable = false, unique = true)
-    private String employeeCode;
-
-    private UUID reportingManagerId;
+    private Long reportingManagerId;
 
     private String workLocation;
 

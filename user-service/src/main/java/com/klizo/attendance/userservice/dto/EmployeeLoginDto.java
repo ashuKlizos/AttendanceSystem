@@ -1,12 +1,10 @@
 package com.klizo.attendance.userservice.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserLoginDto {
+@Data
+public class EmployeeLoginDto {
     private String email;
     private String password;
 

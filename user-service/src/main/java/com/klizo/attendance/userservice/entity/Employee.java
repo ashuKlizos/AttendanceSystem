@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "employees")
@@ -27,7 +28,7 @@ public class Employee {
     private String lastName;
 
     @Past
-    private LocalDate birthDate;
+    private Date birthDate;
 
     @Email
     @NotBlank
