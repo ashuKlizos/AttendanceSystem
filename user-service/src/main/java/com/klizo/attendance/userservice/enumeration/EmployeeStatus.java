@@ -6,4 +6,3 @@ public enum EmployeeStatus {
     TERMINATED,
     DEACTIVATED
 }
-
