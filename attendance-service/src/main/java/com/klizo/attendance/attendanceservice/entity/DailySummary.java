@@ -19,12 +19,15 @@ public class DailySummary {
     private Long id;
 
     private Long employeeId;
+
     private String firstName;
+
     private String lastName;
 
     private LocalDate date;
 
     private Long totalWorkedMinutes;
+
     private Long totalBreakMinutes;
 
     private Boolean exceededBreakLimit;
