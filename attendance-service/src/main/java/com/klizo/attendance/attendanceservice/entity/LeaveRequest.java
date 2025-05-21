@@ -21,14 +21,18 @@ public class LeaveRequest {
     private Long id;
 
     private Long employeeId;
+
     private String firstName;
+
     private String lastName;
 
     @Enumerated(EnumType.STRING)
     private LeaveType type;
 
     private LocalDate fromDate;
+
     private LocalDate toDate;
+
     private String reason;
 
     @Enumerated(EnumType.STRING)

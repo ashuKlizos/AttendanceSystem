@@ -20,7 +20,9 @@ public class Notification {
     private Long id;
 
     private Long employeeId;             // From token
+
     private String firstName;
+
     private String lastName;
 
     private String message;

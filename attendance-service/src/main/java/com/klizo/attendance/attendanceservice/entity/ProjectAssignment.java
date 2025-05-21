@@ -19,13 +19,17 @@ public class ProjectAssignment {
     private Long id;
 
     private Long employeeId;
+
     private String firstName;
+
     private String lastName;
 
     private String projectName;
+
     private String projectManager;
 
     private LocalDate assignedFrom;
+
     private LocalDate assignedTo;
 
     private Boolean isActive;

@@ -20,12 +20,15 @@ public class ShiftChangeRequest {
     private Long id;
 
     private Long employeeId;
+
     private String firstName;
+
     private String lastName;
 
     private LocalDate requestedDate;
 
     private String fromShift;
+
     private String toShift;
 
     private String reason;

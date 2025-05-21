@@ -21,11 +21,15 @@ public class ClockInOut {
     private Long id;
 
     private Long employeeId;
+
     private String firstName;
+
     private String lastName;
 
     private LocalDate date;
+    
     private LocalDateTime inTime;
+
     private LocalDateTime outTime;
 
     @Enumerated(EnumType.STRING)

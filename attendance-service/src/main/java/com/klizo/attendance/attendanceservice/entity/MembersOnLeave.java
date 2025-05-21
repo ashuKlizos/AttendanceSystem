@@ -1,11 +1,9 @@
 package com.klizo.attendance.attendanceservice.entity;
 
-import com.klizo.attendance.attendanceservice.enumeration.RequestStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -13,8 +11,8 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "early_leave_request")
-public class EarlyLeaveRequest {
+@Table(name = "members_on_leave")
+public class MembersOnLeave {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +24,9 @@ public class EarlyLeaveRequest {
 
     private String lastName;
 
-    private LocalDate date;
+    private LocalDate leaveDate;
 
-    private LocalTime leaveTime;
+    private String leaveType;
 
     private String reason;
-
-    @Enumerated(EnumType.STRING)
-    private RequestStatus status;
 }
