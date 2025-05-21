@@ -1,4 +1,4 @@
-package com.klizo.attendance.attendanceservice.exception;
+package com.klizo.attendance.userservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,12 +17,4 @@ public class ErrorResponse {
     private String message;
     private String path;
     private LocalDateTime timestamp;
-
-    public ErrorResponse(int status, String error, String message, String path) {
-        this.status = status;
-        this.error = error;
-        this.message = message;
-        this.path = path;
-        this.timestamp = LocalDateTime.now();
-    }
 }

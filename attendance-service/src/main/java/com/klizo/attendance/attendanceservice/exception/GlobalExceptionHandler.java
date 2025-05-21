@@ -1,5 +1,6 @@
 package com.klizo.attendance.attendanceservice.exception;
 
+import com.klizo.attendance.attendanceservice.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

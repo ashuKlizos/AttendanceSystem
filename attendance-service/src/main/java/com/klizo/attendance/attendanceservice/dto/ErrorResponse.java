@@ -1,4 +1,4 @@
-package com.klizo.attendance.userservice.exception;
+package com.klizo.attendance.attendanceservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
