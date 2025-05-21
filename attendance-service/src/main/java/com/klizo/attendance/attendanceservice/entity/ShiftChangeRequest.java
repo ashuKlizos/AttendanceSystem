@@ -36,4 +36,3 @@ public class ShiftChangeRequest {
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 }
-
