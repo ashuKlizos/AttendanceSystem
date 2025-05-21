@@ -15,7 +15,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handleAttendanceAlreadyMarked(AttendanceAlreadyMarkedException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.CONFLICT.value(),
-                "User Not Found",
+                "Attendance Already Marked",
                 ex.getMessage(),
                 request.getRequestURI()
         );
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handleBadRequest(BadRequestException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
-                "Invalid Credentials",
+                "Bad Request",
                 ex.getMessage(),
                 request.getRequestURI()
         );
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handleInsufficientLeaveBalance(InsufficientLeaveBalanceException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.METHOD_NOT_ALLOWED.value(),
-                "Employee Details Already Exists",
+                "Insufficient Leave Balance",
                 ex.getMessage(),
                 request.getRequestURI()
         );
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handleInvalidClockTime(InvalidClockTimeException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.NOT_ACCEPTABLE.value(),
-                "Invalid Token",
+                "Invalid Clock Time",
                 ex.getMessage(),
                 request.getRequestURI()
         );
@@ -59,7 +59,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handleLeaveApplication(LeaveApplicationException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.SERVICE_UNAVAILABLE.value(),
-                "Role Not Found",
+                "Leave Application",
                 ex.getMessage(),
                 request.getRequestURI()
         );
@@ -81,7 +81,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handlePrivacyPolicyViolation(PrivacyPolicyViolationException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
-                "Unauthorized Access",
+                "Privacy Policy Violation",
                 ex.getMessage(),
                 request.getRequestURI()
         );
@@ -92,7 +92,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handleProjectAssignmentNotFound(ProjectAssignmentNotFoundException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
-                "Unauthorized Access",
+                "Project Assignment Not Found",
                 ex.getMessage(),
                 request.getRequestURI()
         );
@@ -103,7 +103,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
-                "Unauthorized Access",
+                "Resource Not Found",
                 ex.getMessage(),
                 request.getRequestURI()
         );
@@ -114,7 +114,7 @@ public class GlobalExceptionHandler{
     public ResponseEntity<ErrorResponse> handleShiftChangeRequest(ShiftChangeRequestException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
-                "Unauthorized Access",
+                "Shift Change Request",
                 ex.getMessage(),
                 request.getRequestURI()
         );
