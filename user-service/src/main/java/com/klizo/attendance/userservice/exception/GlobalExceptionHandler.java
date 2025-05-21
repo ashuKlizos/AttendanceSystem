@@ -25,45 +25,45 @@ public class GlobalExceptionHandler{
     @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<ErrorResponse> handleInvalidCredentials(InvalidCredentialsException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
-                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.FORBIDDEN.value(),
                 "Invalid Credentials",
                 ex.getMessage(),
                 request.getRequestURI()
         );
-        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(EmployeeDetailsAlreadyExistsException.class)
     public ResponseEntity<ErrorResponse> handleEmployeeDetailsAlreadyExists(EmployeeDetailsAlreadyExistsException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
-                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.CONFLICT.value(),
                 "Employee Details Already Exists",
                 ex.getMessage(),
                 request.getRequestURI()
         );
-        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<ErrorResponse> handleInvalidToken(InvalidTokenException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
-                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.FORBIDDEN.value(),
                 "Invalid Token",
                 ex.getMessage(),
                 request.getRequestURI()
         );
-        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(RoleNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleRoleNotFound(RoleNotFoundException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
-                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.NOT_FOUND.value(),
                 "Role Not Found",
                 ex.getMessage(),
                 request.getRequestURI()
         );
-        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(UnauthorizedAccessException.class)

@@ -36,23 +36,23 @@ public class GlobalExceptionHandler{
     @ExceptionHandler(RabbitMQProcessingException.class)
     public ResponseEntity<ErrorResponse> handleRabbitMQProcessing(RabbitMQProcessingException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
-                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.NOT_IMPLEMENTED.value(),
                 "Rabbit MQ Processing Error",
                 ex.getMessage(),
                 request.getRequestURI()
         );
-        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
-                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.NOT_FOUND.value(),
                 "Resource Not Found",
                 ex.getMessage(),
                 request.getRequestURI()
         );
-        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
