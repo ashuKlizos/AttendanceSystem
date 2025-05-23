@@ -5,7 +5,7 @@ import com.klizo.attendance.userservice.enumeration.EmployeeType;
 import lombok.Data;
 
 @Data
-public class EmployeeResponseDto {
+public class EmployeeResponse {
     private Long id;
     private String firstName;
     private String lastName;

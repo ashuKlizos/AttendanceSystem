@@ -4,5 +4,6 @@ public enum ShiftTiming {
     MORNING,
     EVENING,
     NIGHT,
-    FLEXIBLE
+    FLEXIBLE,
+    AFTERNOON
 }

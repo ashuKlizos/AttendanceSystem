@@ -2,6 +2,7 @@ package com.klizo.attendance.userservice.entity;
 
 import com.klizo.attendance.userservice.enumeration.EmployeeStatus;
 import com.klizo.attendance.userservice.enumeration.EmployeeType;
+import com.klizo.attendance.userservice.enumeration.Role;
 import com.klizo.attendance.userservice.enumeration.ShiftTiming;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -15,23 +16,35 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "employee_details")
+@Table(name = "employees")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EmployeeDetail {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id", nullable = false, unique = true)
-    private Employee employee;
+    private EmployeeDetails employeeDetails;
+
+    @NotBlank
+    @Column(nullable = false, unique = true)
+    private String password;
+
+    @Email
+    @NotBlank
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @NotNull
     private LocalDate joiningDate;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @NotBlank
     private String designation;

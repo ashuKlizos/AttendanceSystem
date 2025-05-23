@@ -7,12 +7,12 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "employee_details")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Employee {
+public class EmployeeDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Employee {
     @Email
     @NotBlank
     @Column(nullable = false, unique = true)
-    private String email;
+    private String personalEmail;
 
     @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
     @Column(nullable = false, unique = true)
@@ -45,7 +45,7 @@ public class Employee {
 
     private String gender;
 
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private EmployeeDetail employeeDetails;
+    @OneToOne(mappedBy = "employeeDetails")
+    private Employee employee;
 
 }

@@ -1,8 +1,10 @@
 package com.klizo.attendance.userservice.enumeration;
-public enum Roles {
+public enum Role {
     HR,
     MANAGER,
     TEAM_LEADER,
     PROJECT_MANAGER,
-    DIRECTOR
+    DIRECTOR,
+    EMPLOYEE,
+    TRAINEE
 }
