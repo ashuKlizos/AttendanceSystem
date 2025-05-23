@@ -1,63 +1,51 @@
 package com.klizo.attendance.userservice.entity;
 
-import com.klizo.attendance.userservice.enumeration.EmployeeStatus;
-import com.klizo.attendance.userservice.enumeration.EmployeeType;
-import com.klizo.attendance.userservice.enumeration.ShiftTiming;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
-@Table(name = "employee_details")
+@Table(name = "employees")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EmployeeDetails {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "employee_id", nullable = false, unique = true)
-    private Employee employee;
-
-    @NotNull
-    private LocalDate joiningDate;
+    @NotBlank
+    @Column(nullable = false)
+    private String firstName;
 
     @NotBlank
-    private String designation;
+    @Column(nullable = false)
+    private String lastName;
 
-    private Long reportingManagerId;
+    @Past
+    private Date birthDate;
 
-    private String workLocation;
+    @Email
+    @NotBlank
+    @Column(nullable = false, unique = true)
+    private String email;
 
-    @Enumerated(EnumType.STRING)
-    private ShiftTiming shiftTiming;
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
+    @Column(nullable = false, unique = true)
+    private String phoneNumber;
 
-    private LocalTime shiftStartTime;
+    @Column(length = 500)
+    private String address;
 
-    private LocalTime shiftEndTime;
+    private String bloodGroup;
 
-    @Enumerated(EnumType.STRING)
-    private EmployeeType employeeType;
+    private String gender;
 
-    private BigDecimal salary;
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EmployeeDetail employeeDetails;
 
-    @Enumerated(EnumType.STRING)
-    private EmployeeStatus status;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 }
