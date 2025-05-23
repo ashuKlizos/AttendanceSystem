@@ -26,8 +26,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/api/attendance/clock-in", "/api/attendance/clock-out", "/api/attendance/break",
-                                "/api/attendance/v1/clock-in", "/api/attendance/v1/clock-out").permitAll()
+                        .requestMatchers("/api/attendance/clock-in", "/api/attendance/clock-out", "/api/attendance/break").permitAll()
                         .requestMatchers("/api/attendance/updateAttendance", "/api/attendance/holiday").hasAnyRole("DIRECTOR", "MANAGER")
                         .anyRequest().authenticated()
                 )

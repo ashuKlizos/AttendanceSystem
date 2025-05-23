@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectAssignmentRequestDto {
-    private Long employeeId;
     private String projectName;
     private String projectManager;
     private LocalDate assignedFrom;

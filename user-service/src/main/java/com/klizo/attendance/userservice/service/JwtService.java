@@ -1,5 +1,7 @@
 package com.klizo.attendance.userservice.service;
 
+import com.klizo.attendance.userservice.entity.EmployeeDetails;
+import com.klizo.attendance.userservice.repository.EmployeeDetailsRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -18,9 +20,14 @@ public class JwtService {
 
     private final String SECRET_KEY = "b33611cb858fa9c4f9e381e7f00dcc623285e0f3a3e01b4369347f910eff911b";
     private final long EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 hours
+    private final EmployeeDetailsRepository employeeDetailsRepository;
+
+    public JwtService(EmployeeDetailsRepository employeeDetailsRepository) {
+        this.employeeDetailsRepository = employeeDetailsRepository;
+    }
 
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject); // Subject = email
+        return extractClaim(token, Claims::getSubject);
     }
 
     public String extractRole(String token) {
@@ -30,6 +37,8 @@ public class JwtService {
     public Long extractEmployeeId(String token) {
         return extractClaim(token, claims -> claims.get("employeeId", Long.class));
     }
+
+
 
     public boolean isValid(String token, UserDetails user) {
         String username = extractUsername(token);
@@ -63,10 +72,13 @@ public class JwtService {
     }
 
     public String generateToken(Employee employee) {
+        EmployeeDetails employeeDetails = employeeDetailsRepository.findById(employee.getEmployeeDetails().getId()).get();
         return Jwts.builder()
                 .subject(employee.getEmail())
                 .claim("role", employee.getRole().name())
                 .claim("employeeId", employee.getId())
+                .claim("firstName" , employeeDetails.getFirstName())
+                .claim("lastName" , employeeDetails.getLastName())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(getSigninKey())

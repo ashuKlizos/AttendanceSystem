@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface EmployeeService {
+
     String createEmployee(Employee employee);
+
     AuthenticationResponse login(LoginRequest loginRequest);
+
+    String deleteEmployee(long employeeId);
 }

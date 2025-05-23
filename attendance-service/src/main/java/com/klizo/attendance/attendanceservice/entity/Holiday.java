@@ -24,4 +24,3 @@ public class Holiday {
 
     private String description;
 }
-

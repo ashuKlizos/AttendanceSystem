@@ -1,8 +1,10 @@
 package com.klizo.attendance.attendanceservice.controller;
 
 import com.klizo.attendance.attendanceservice.dto.*;
+import com.klizo.attendance.attendanceservice.enumeration.ClockType;
 import com.klizo.attendance.attendanceservice.service.AttendanceService;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -19,28 +21,37 @@ public class AttendanceController {
     }
 
 
+//    @PreAuthorize("hasAnyRole('MANAGER' , 'EMPLOYEE' , 'DIRECTOR' , 'TRAINEE' , 'HR' , 'PROJECT_MANAGER')")
+//    @PostMapping("/clock-in")
+//    public String clockIn(@RequestHeader("Authorization") String token , ClockType type) {
+//        return attendanceService.recordClockIn(token , type);
+//    }
+//
+//    @PreAuthorize("hasAnyRole('MANAGER' , 'EMPLOYEE' , 'DIRECTOR' , 'TRAINEE' , 'HR' , 'PROJECT_MANAGER')")
+//    @PostMapping("/clock-out")
+//    public String clockOut(@RequestHeader("Authorization") String token , ClockType type) {
+//        return attendanceService.recordClockOut(token , type);
+//    }
+
     @PostMapping("/clock-in")
-    public String clockIn(@RequestHeader("Authorization") String token) {
-        return attendanceService.recordClockIn(token);
-    }
-
-    @PostMapping("/clock-out")
-    public String clockOut(@RequestHeader("Authorization") String token) {
-        return attendanceService.recordClockOut(token);
-    }
-
-    @PostMapping("/v1/clock-in")
     public ApiResponseDto<ClockInOutResponseDto> clockInV1(
             @RequestHeader("Authorization") String token,
             @RequestBody ClockInRequestDto request) {
         return attendanceService.clockIn(token, request);
     }
-    
-    @PostMapping("/v1/clock-out")
+
+    @PostMapping("/clock-out")
     public ApiResponseDto<ClockInOutResponseDto> clockOutV1(
             @RequestHeader("Authorization") String token,
             @RequestBody ClockOutRequestDto request) {
         return attendanceService.clockOut(token, request);
+    }
+
+    @PostMapping("/break")
+    public ApiResponseDto<ClockInOutResponseDto> Break(
+            @RequestHeader("Authorization") String token,
+            @RequestBody BreakRequestDto request) {
+        return attendanceService.Break(token, request);
     }
 
     @PostMapping("/leave-request")

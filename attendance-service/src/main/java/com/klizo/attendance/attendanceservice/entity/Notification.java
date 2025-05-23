@@ -19,7 +19,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long employeeId;             // From token
+    private Long employeeId;
 
     private String firstName;
 
@@ -28,7 +28,7 @@ public class Notification {
     private String message;
 
     @Enumerated(EnumType.STRING)
-    private NotificationType type;      // IN_APP, EMAIL, etc.
+    private NotificationType type;
 
     private Boolean isRead;
 

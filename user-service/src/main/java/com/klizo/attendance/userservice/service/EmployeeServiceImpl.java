@@ -9,12 +9,10 @@ import com.klizo.attendance.userservice.enumeration.EmployeeType;
 import com.klizo.attendance.userservice.enumeration.Role;
 import com.klizo.attendance.userservice.enumeration.ShiftTiming;
 import com.klizo.attendance.userservice.exception.EmployeeDetailsAlreadyExistsException;
+import com.klizo.attendance.userservice.exception.InvalidCredentialsException;
 import com.klizo.attendance.userservice.exception.InvalidTokenException;
 import com.klizo.attendance.userservice.repository.EmployeeDetailsRepository;
 import com.klizo.attendance.userservice.repository.EmployeeRepository;
-
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -43,32 +41,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public String createEmployee(Employee employee) {
-        
-        if (employeeRepository.findByEmail(employee.getEmail()) != null) {
-            throw new EmployeeDetailsAlreadyExistsException("Employee with this email already exists");
+        try
+        {
+            if (employeeRepository.findByEmail(employee.getEmail()) != null) {
+                throw new EmployeeDetailsAlreadyExistsException("Employee with this email already exists");
+            }
+
+            if (employee.getEmployeeDetails() == null) {
+                throw new IllegalArgumentException("Employee details are required");
+            }
+
+            employee.getEmployeeDetails().setEmployee(employee);
+
+            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+            employee.setJoiningDate(employee.getJoiningDate() != null ? employee.getJoiningDate() : LocalDate.now());
+            employee.setDesignation(employee.getDesignation() != null ? employee.getDesignation() : "FresherDeveloper");
+            employee.setRole(employee.getRole() != null ? employee.getRole() : Role.EMPLOYEE);
+            employee.setEmployeeType(employee.getEmployeeType() != null ? employee.getEmployeeType() : EmployeeType.FULL_TIME);
+
+            if (employee.getShiftTiming() == null) {
+                employee.setShiftTiming(ShiftTiming.AFTERNOON);
+                employee.setShiftStartTime(LocalTime.of(12, 0));
+                employee.setShiftEndTime(LocalTime.of(21, 0));
+            }
+
+            employee.setCreatedAt(LocalDateTime.now());
+            employee.setUpdatedAt(LocalDateTime.now());
+            employee.setStatus(EmployeeStatus.ACTIVE);
         }
-
-        if (employee.getEmployeeDetails() == null) {
-            throw new IllegalArgumentException("Employee details are required");
+        catch (Exception e)
+        {
+            throw new InvalidCredentialsException("Invalid Employee Details: " + e);
         }
-
-        employee.getEmployeeDetails().setEmployee(employee);
-
-        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-        employee.setJoiningDate(employee.getJoiningDate() != null ? employee.getJoiningDate() : LocalDate.now());
-        employee.setDesignation(employee.getDesignation() != null ? employee.getDesignation() : "FresherDeveloper");
-        employee.setRole(employee.getRole() != null ? employee.getRole() : Role.EMPLOYEE);
-        employee.setEmployeeType(employee.getEmployeeType() != null ? employee.getEmployeeType() : EmployeeType.FULL_TIME);
-        
-        if (employee.getShiftTiming() == null) {
-            employee.setShiftTiming(ShiftTiming.AFTERNOON);
-            employee.setShiftStartTime(LocalTime.of(12, 0));
-            employee.setShiftEndTime(LocalTime.of(21, 0));
-        }
-
-        employee.setCreatedAt(LocalDateTime.now());
-        employee.setUpdatedAt(LocalDateTime.now());
-        employee.setStatus(EmployeeStatus.ACTIVE);
 
         try {
             employeeRepository.save(employee);
@@ -91,5 +95,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         String token = jwtService.generateToken(employee);
         return new AuthenticationResponse(token);
+    }
+
+    @Override
+    public String deleteEmployee(long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).get();
+        EmployeeDetails employeeDetails = employeeDetailsRepository.findById(employee.getEmployeeDetails().getId()).get();
+        log.info("Deleting Employee: {} {} EmployeeId: {}" , employeeDetails.getFirstName() , employeeDetails.getLastName() , employeeId);
+        employeeRepository.deleteById(employeeId);
+        employeeDetailsRepository.deleteById(employeeDetails.getId());
+        return "Employee Deleted Successfully";
     }
 }

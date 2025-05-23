@@ -14,5 +14,5 @@ public class ClockInOutResponseDto {
     private String firstName;
     private String lastName;
     private LocalDateTime timestamp;
-    private String type; // CLOCK_IN or CLOCK_OUT
+    private String type;
 }

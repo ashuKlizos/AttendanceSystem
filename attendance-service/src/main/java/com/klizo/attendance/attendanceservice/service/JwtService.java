@@ -28,19 +28,25 @@ public class JwtService {
         return extractClaim(token, claims -> claims.get("role", String.class));
     }
 
-    public String getCustomerId(String token) {
+    public Long getEmployeeId(String token) {
         try {
-            Long customerIdLong = extractClaim(token, claims -> claims.get("customerId", Long.class));
+            Long customerIdLong = extractClaim(token, claims -> claims.get("employeeId", Long.class));
 
             if (customerIdLong == null) {
                 return null;
             }
 
-            String customerId = String.valueOf(customerIdLong);
-            return customerId;
+            return customerIdLong;
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public String getFirstName(String token) {
+        return extractClaim(token, claims -> claims.get("firstName", String.class));
+    }
+    public String getLastName(String token) {
+        return extractClaim(token, claims -> claims.get("lastName", String.class));
     }
 
     public boolean isValid(String token) {

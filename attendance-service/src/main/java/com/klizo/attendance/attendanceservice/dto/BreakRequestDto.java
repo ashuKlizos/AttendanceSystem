@@ -1,17 +1,16 @@
 package com.klizo.attendance.attendanceservice.dto;
 
+
 import com.klizo.attendance.attendanceservice.enumeration.ClockType;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.Clock;
-
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
-public class ClockOutRequestDto {
+@NoArgsConstructor
+public class BreakRequestDto {
     private ClockType type;
 }
